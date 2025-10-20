@@ -1,0 +1,226 @@
+/* ===========================
+   RESET & DASAR
+=========================== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #333;
+  scroll-behavior: smooth;
+}
+.logo-bundar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;  /* biar gambar tetap proporsional */
+  border: 2px solid #ffffff; /* opsional, bingkai biru elegan */
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+header {
+  background: linear-gradient(90deg, #ffffff, #f0f0f0);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  letter-spacing: 19px;
+}
+
+header nav a {
+  transition: 0.3s;
+}
+.nav-btn-blue {
+  color: rgb(254, 254, 254);
+  background: transparent;
+  border: 2px solid rgba(13, 13, 13, 0.8);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+header nav a:hover {
+  background-color: #030303;
+  color: #0f0f0f !important;
+}
+
+#event-produk {
+  margin-top: 25px !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.event-container {
+  display: flex;
+  justify-content: flex-start; /* posisi kiri */
+  align-items: center;         /* sejajarkan secara vertikal */
+  padding-left: 55px;          /* jarak dari tepi kiri */
+}
+
+.event-image {
+  width: 100%;
+  height: auto;
+  max-width: 530px;            /* ukuran aman, proporsional */
+  object-fit: contain;
+  display: block;
+}
+
+/* Container produk */
+.produk-container {
+  flex: 1;
+  max-width: 750px;
+  padding-right: 40px;
+}
+
+/* Gambar produk */
+.product-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;         /* bikin foto rasio 1:1 */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ===========================
+  banner
+=========================== */
+.carousel-inner img {
+  height: 590px;
+  object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+
+/* ===========================
+   PRODUK CARD
+=========================== */
+.product-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  height: 230px;
+  object-fit: cover;
+}
+
+.product-card .card-body {
+  background-color: #fff;
+}
+
+.product-card .btn {
+  transition: 0.3s;
+}
+
+.product-card .btn:hover {
+  background-color: #181818;
+  color: #fff;
+}
+
+/* ===========================
+   TENTANG KAMI
+=========================== */
+#tentang {
+  background-color: #373737;
+  border-radius: 12px;
+  padding: 40px;
+}
+
+#tentang img {
+  max-width: 200px;
+  border: 4px solid #ffffff;
+}
+
+/* ===========================
+   TESTIMONI
+=========================== */
+#testimoni .card {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+#testimoni .card:hover {
+  transform: scale(1.05);
+}
+
+#testimoni h3 {
+  color: #000000;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background-color: #212529;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ===========================
+   BACK TO TOP BUTTON
+=========================== */
+#backToTop {
+  display: none;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  line-height: 1;
+  background-color: #121212;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+  z-index: 999;
+}
+
+#backToTop:hover {
+  background-color: #111111;
+  transform: translateY(-3px);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-inner img {
+    height: 250px;
+  }
+
+  #tentang {
+    text-align: center;
+  }
+
+  #tentang img {
+    margin-top: 20px;
+  }
+}

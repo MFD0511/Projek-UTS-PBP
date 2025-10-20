@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keset Home - Produk</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+  <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Tambahan style khusus halaman produk */
+    .product-card {
+      cursor: pointer;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .modal-product-img {
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
+    .price-tag {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #dc3545;
+    }
+    
+    .whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .whatsapp-btn:hover {
+      background-color: #20ba5a;
+      transform: scale(1.05);
+      color: white;
+    }
+    
+    .filter-btn {
+      transition: all 0.3s;
+    }
+    
+    .filter-btn.active {
+      background-color: #212529 !important;
+      color: white !important;
+      border-color: #212529 !important;
+    }
+    
+    .badge-promo {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="bg-danger text-white py-3 shadow-sm">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <img src="logoatas.png" alt="Logo Keset Home" class="logo-bundar">
+        <h1 class="h3 mb-0 fw-bold" style="color: black;">KESET HOME</h1>
+      </div>
+      <nav class="d-flex gap-3">
+        <a href="index.html" class="nav-btn-blue" style="color: black;">Home</a>
+        <a href="produk.html" class="nav-btn-blue" style="color: black;">Produk</a>
+        <a href="#tentang" class="nav-btn-blue" style="color: black;">Tentang</a>
+        <a href="kontak.html" class="nav-btn-blue" style="color: black;">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="container-fluid text-center py-5 bg-light shadow-sm mt-3">
+    <h2 class="fw-bold mb-2">Koleksi Produk Keset Home</h2>
+    <p class="text-muted">Temukan berbagai pilihan keset tebal, lembut, dan minimalis untuk rumah Anda.</p>
+  </section>
+
+  <!-- FILTER & PROMO -->
+  <section class="container my-4">
+    <div class="row align-items-center">
+      <div class="col-md-8 d-flex flex-wrap gap-2 mb-3 mb-md-0">
+        <button class="btn btn-outline-dark btn-sm filter-btn active" data-filter="all">Semua</button>
+        <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="lembut">Keset Lembut</button>
+        <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="sumbu">Keset Sumbu</button>
+        <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="serap">Keset Serap Air</button>
+        <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="polos">Keset Polos</button>
+      </div>
+      <div class="col-md-4 text-md-end text-center">
+        <span class="badge bg-danger fs-6 px-3 py-2 shadow-sm badge-promo">Promo 10.10: Diskon s.d 50%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUK GRID -->
+  <section class="container my-5" id="produk">
+    <div class="row g-4" id="productGrid">
+      <!-- Produk akan dimuat oleh JavaScript -->
+    </div>
+  </section>
+
+  <!-- BANNER PROMO -->
+  <section class="container-fluid bg-dark text-white text-center py-5 my-5">
+    <h3 class="fw-bold mb-3">Spesial Bulan Ini!</h3>
+    <p class="mb-4">Dapatkan potongan harga hingga 50% untuk pembelian grosir.</p>
+    <a href="#produk" class="btn btn-light fw-semibold">Cek Sekarang</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">&copy; 2025 Keset Home | All Rights Reserved</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="btn btn-danger position-fixed bottom-0 end-0 m-4 rounded-circle shadow" title="Kembali ke atas">↑</button>
+
+  <!-- Modal Detail Produk -->
+  <div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalTitle"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img id="modalImage" src="" class="img-fluid modal-product-img w-100" alt="">
+            </div>
+            <div class="col-md-6">
+              <div class="price-tag mb-3" id="modalPrice"></div>
+              <div class="mb-3">
+                <span class="badge bg-secondary me-2" id="modalCategory"></span>
+              </div>
+              <h6 class="fw-bold mb-2">Deskripsi Produk:</h6>
+              <p id="modalDescription" class="text-muted"></p>
+              
+              <h6 class="fw-bold mb-2 mt-4">Spesifikasi:</h6>
+              <ul id="modalSpecs" class="text-muted"></ul>
+              
+              <div class="mt-4">
+                <button class="whatsapp-btn" id="contactBtn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  Hubungi Admin
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+  <script>
+    // Data Produk
+    const products = [
+      {
+        id: 1,
+        name: "Keset Lembut Kotak Premium",
+        price: "Rp15.000",
+        category: "lembut",
+        image: "produk1.jpg",
+        description: "Keset dengan bahan super lembut dan nyaman untuk kaki. Cocok untuk kamar tidur dan ruang tamu.",
+        specs: ["Ukuran: 40x60 cm", "Bahan: Microfiber", "Tersedia 15+ warna", "Anti-slip backing", "Mudah dicuci"]
+      },
+      {
+        id: 2,
+        name: "Keset Sumbu Wajik Ekonomis",
+        price: "Rp10.000 (isi 3)",
+        category: "sumbu",
+        image: "produk3.png",
+        description: "Keset sumbu dengan daya serap tinggi, ideal untuk area basah seperti kamar mandi dan dapur.",
+        specs: ["Ukuran: 35x50 cm", "Bahan: Cotton blend", "Isi 3 pcs", "Cepat kering", "Tahan lama"]
+      },
+      {
+        id: 3,
+        name: "Keset Polos Minimalis Modern",
+        price: "Rp18.000",
+        category: "polos",
+        image: "produk4.jpg",
+        description: "Desain minimalis elegan yang cocok untuk interior modern. Simple namun berkelas.",
+        specs: ["Ukuran: 45x65 cm", "Bahan: Premium cotton", "Warna netral", "Anti-bacterial", "Tebal & empuk"]
+      },
+      {
+        id: 4,
+        name: "Keset Serap Air Super",
+        price: "Rp20.000",
+        category: "serap",
+        image: "produk7.png",
+        description: "Keset dengan teknologi serap air maksimal. Cepat kering dan anti-slip untuk keamanan.",
+        specs: ["Ukuran: 50x70 cm", "Teknologi quick-dry", "Anti-slip rubber", "Daya serap tinggi", "Garansi kualitas"]
+      },
+      {
+        id: 5,
+        name: "Keset Lembut Motif Bunga",
+        price: "Rp17.000",
+        category: "lembut",
+        image: "produk5.jpg",
+        description: "Keset lembut dengan motif bunga cantik, memberikan sentuhan ceria di rumah Anda.",
+        specs: ["Ukuran: 40x60 cm", "Motif bunga", "Bahan microfiber", "Warna cerah", "Mudah perawatan"]
+      },
+      {
+        id: 6,
+        name: "Keset Sumbu Kotak Classic",
+        price: "Rp12.000",
+        category: "sumbu",
+        image: "produk7.jpg",
+        description: "Keset sumbu klasik dengan pola kotak-kotak. Awet dan mudah dibersihkan.",
+        specs: ["Ukuran: 40x55 cm", "Pola kotak", "Bahan cotton", "Ekonomis", "Multi fungsi"]
+      },
+      {
+        id: 7,
+        name: "Keset Polos Elegant Grey",
+        price: "Rp19.000",
+        category: "polos",
+        image: "prdk.jpg",
+        description: "Keset abu-abu elegan yang cocok untuk semua jenis interior. Premium quality.",
+        specs: ["Ukuran: 50x75 cm", "Warna abu-abu", "Extra tebal", "Tekstur lembut", "Premium quality"]
+      },
+      {
+        id: 8,
+        name: "Keset Serap Air Kamar Mandi",
+        price: "Rp22.000",
+        category: "serap",
+        image: "produk8.jpg",
+        description: "Khusus untuk kamar mandi dengan daya serap super cepat dan anti jamur.",
+        specs: ["Ukuran: 45x70 cm", "Anti jamur", "Quick dry technology", "Anti-slip", "Hygiene+"]
+      },
+      {
+        id: 9,
+        name: "Keset Lembut XL Size",
+        price: "Rp25.000",
+        category: "lembut",
+        image: "produk9.jpg",
+        description: "Keset ukuran extra large untuk area yang lebih luas. Super lembut dan nyaman.",
+        specs: ["Ukuran: 60x90 cm", "Extra large", "Super soft", "Tebal premium", "Luxury feel"]
+      },
+      {
+        id: 10,
+        name: "Keset Sumbu Set 5 Pcs",
+        price: "Rp45.000",
+        category: "sumbu",
+        image: "produk10.jpg",
+        description: "Paket hemat 5 keset sumbu untuk seluruh area rumah. Harga spesial!",
+        specs: ["Isi 5 pcs", "Ukuran 40x50 cm", "Warna mix", "Hemat 30%", "Best seller"]
+      },
+      {
+        id: 11,
+        name: "Keset Polos Black Premium",
+        price: "Rp21.000",
+        category: "polos",
+        image: "produk11.jpg",
+        description: "Keset hitam premium dengan kualitas terbaik. Elegan dan tidak mudah kotor.",
+        specs: ["Ukuran: 50x70 cm", "Warna hitam", "Hide dirt", "Premium cotton", "Elegant design"]
+      },
+      {
+        id: 12,
+        name: "Keset Serap Air Dapur",
+        price: "Rp18.000",
+        category: "serap",
+        image: "produk12.jpg",
+        description: "Keset khusus dapur yang tahan noda dan mudah dibersihkan. Praktis!",
+        specs: ["Ukuran: 40x60 cm", "Tahan noda", "Mudah dicuci", "Anti-slip", "Untuk dapur"]
+      }
+    ];
+
+    // Nomor WhatsApp Admin (ganti dengan nomor Anda)
+    const adminWhatsApp = "6287866203605";
+
+    // Render Products
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      
+      const filteredProducts = filter === 'all' 
+        ? products 
+        : products.filter(p => p.category === filter);
+      
+      filteredProducts.forEach(product => {
+        const col = document.createElement('div');
+        col.className = 'col-sm-6 col-md-4 col-lg-3';
+        col.innerHTML = `
+          <div class="card product-card h-100" onclick="showProductDetail(${product.id})">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            <div class="card-body text-center">
+              <h6 class="fw-bold">${product.name}</h6>
+              <p class="text-danger fw-semibold mb-1">${product.price}</p>
+              <p class="text-muted small mb-3">${product.description.substring(0, 50)}...</p>
+              <button class="btn btn-outline-danger btn-sm">Lihat Detail</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(col);
+      });
+    }
+
+    // Show Product Detail
+    function showProductDetail(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      
+      document.getElementById('modalTitle').textContent = product.name;
+      document.getElementById('modalImage').src = product.image;
+      document.getElementById('modalPrice').textContent = product.price;
+      document.getElementById('modalCategory').textContent = getCategoryName(product.category);
+      document.getElementById('modalDescription').textContent = product.description;
+      
+      const specsList = document.getElementById('modalSpecs');
+      specsList.innerHTML = '';
+      product.specs.forEach(spec => {
+        const li = document.createElement('li');
+        li.textContent = spec;
+        specsList.appendChild(li);
+      });
+      
+      // Update WhatsApp button
+      document.getElementById('contactBtn').onclick = () => {
+        const message = `Halo, saya tertarik dengan produk *${product.name}* seharga ${product.price}. Apakah masih tersedia?`;
+        const waLink = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(message)}`;
+        window.open(waLink, '_blank');
+      };
+      
+      const modal = new bootstrap.Modal(document.getElementById('productModal'));
+      modal.show();
+    }
+
+    // Get Category Name
+    function getCategoryName(category) {
+      const names = {
+        'lembut': 'Keset Lembut',
+        'sumbu': 'Keset Sumbu',
+        'serap': 'Keset Serap Air',
+        'polos': 'Keset Polos'
+      };
+      return names[category] || category;
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderProducts(this.dataset.filter);
+      });
+    });
+
+    // Initial render
+    renderProducts();
+  </script>
+</body>
+</html>
